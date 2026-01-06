@@ -70,7 +70,7 @@ model HospitalService {
 
 model EmergencyBedBooking {
   id         String @id @default(uuid()) @db.VarChar(255)
-  hospitalId String @unique @db.VarChar(255)
+  hospitalId String @db.VarChar(255)
 
   userName  String @db.VarChar(80)
   userPhone String @db.VarChar(15)

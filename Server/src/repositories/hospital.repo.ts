@@ -91,6 +91,9 @@ class HospitalRepository {
         latitude: number;
         longitude: number;
         distance: number;
+        totalBeds: number;
+        availableBeds: number;
+        emergencyBeds: number;
       }>
     >`
       SELECT *
@@ -103,6 +106,9 @@ class HospitalRepository {
           h."contactEmail",
           hl.latitude,
           hl.longitude,
+          hs."totalBeds",
+          hs."availableBeds",
+          hs."emergencyBeds",
           (
             6371 * acos(
               cos(radians(${Number(lat)}))
@@ -114,6 +120,7 @@ class HospitalRepository {
           ) AS distance
         FROM "HospitalLocation" hl
         JOIN "Hospital" h ON hl."hospitalId" = h.id
+        LEFT JOIN "HospitalService" hs ON h.id = hs."hospitalId"
       ) AS sub
       WHERE distance <= ${Number(radius)}
       ORDER BY distance

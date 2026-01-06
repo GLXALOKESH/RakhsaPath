@@ -32,6 +32,9 @@ async function main() {
             h."contactEmail",
             hl.latitude,
             hl.longitude,
+            hs."totalBeds",
+            hs."availableBeds",
+            hs."emergencyBeds",
             (
               6371 * acos(
                 cos(radians(${lat}))
@@ -43,6 +46,7 @@ async function main() {
             ) AS distance
           FROM "HospitalLocation" hl
           JOIN "Hospital" h ON hl."hospitalId" = h.id
+          LEFT JOIN "HospitalService" hs ON h.id = hs."hospitalId"
         ) AS sub
         WHERE distance <= ${radius}
         ORDER BY distance
