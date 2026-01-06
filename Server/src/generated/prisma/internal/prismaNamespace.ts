@@ -387,7 +387,8 @@ export const ModelName = {
   HospitalUser: 'HospitalUser',
   Hospital: 'Hospital',
   HospitalLocation: 'HospitalLocation',
-  HospitalService: 'HospitalService'
+  HospitalService: 'HospitalService',
+  EmergencyBedBooking: 'EmergencyBedBooking'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -403,7 +404,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "hospitalUser" | "hospital" | "hospitalLocation" | "hospitalService"
+    modelProps: "hospitalUser" | "hospital" | "hospitalLocation" | "hospitalService" | "emergencyBedBooking"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -703,6 +704,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    EmergencyBedBooking: {
+      payload: Prisma.$EmergencyBedBookingPayload<ExtArgs>
+      fields: Prisma.EmergencyBedBookingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EmergencyBedBookingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmergencyBedBookingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EmergencyBedBookingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmergencyBedBookingPayload>
+        }
+        findFirst: {
+          args: Prisma.EmergencyBedBookingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmergencyBedBookingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EmergencyBedBookingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmergencyBedBookingPayload>
+        }
+        findMany: {
+          args: Prisma.EmergencyBedBookingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmergencyBedBookingPayload>[]
+        }
+        create: {
+          args: Prisma.EmergencyBedBookingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmergencyBedBookingPayload>
+        }
+        createMany: {
+          args: Prisma.EmergencyBedBookingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EmergencyBedBookingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmergencyBedBookingPayload>[]
+        }
+        delete: {
+          args: Prisma.EmergencyBedBookingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmergencyBedBookingPayload>
+        }
+        update: {
+          args: Prisma.EmergencyBedBookingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmergencyBedBookingPayload>
+        }
+        deleteMany: {
+          args: Prisma.EmergencyBedBookingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EmergencyBedBookingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EmergencyBedBookingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmergencyBedBookingPayload>[]
+        }
+        upsert: {
+          args: Prisma.EmergencyBedBookingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmergencyBedBookingPayload>
+        }
+        aggregate: {
+          args: Prisma.EmergencyBedBookingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEmergencyBedBooking>
+        }
+        groupBy: {
+          args: Prisma.EmergencyBedBookingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EmergencyBedBookingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EmergencyBedBookingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EmergencyBedBookingCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -792,6 +867,21 @@ export const HospitalServiceScalarFieldEnum = {
 } as const
 
 export type HospitalServiceScalarFieldEnum = (typeof HospitalServiceScalarFieldEnum)[keyof typeof HospitalServiceScalarFieldEnum]
+
+
+export const EmergencyBedBookingScalarFieldEnum = {
+  id: 'id',
+  hospitalId: 'hospitalId',
+  userName: 'userName',
+  userPhone: 'userPhone',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  typeOfEmergency: 'typeOfEmergency',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EmergencyBedBookingScalarFieldEnum = (typeof EmergencyBedBookingScalarFieldEnum)[keyof typeof EmergencyBedBookingScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -992,6 +1082,7 @@ export type GlobalOmitConfig = {
   hospital?: Prisma.HospitalOmit
   hospitalLocation?: Prisma.HospitalLocationOmit
   hospitalService?: Prisma.HospitalServiceOmit
+  emergencyBedBooking?: Prisma.EmergencyBedBookingOmit
 }
 
 /* Types for Logging */

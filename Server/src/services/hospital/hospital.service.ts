@@ -1,5 +1,6 @@
 import ErrorInterface from "../../interfaces/error.interface.js";
 import CreateHospitalInterface, {
+  CheckNearbyHospitalsInterface,
   LoginHospitalInterface,
 } from "../../interfaces/hospital.interface.js";
 import HospitalRepository from "../../repositories/hospital.repo.js";
@@ -81,7 +82,10 @@ class HospitalService {
     try {
       // Check if user exists
       const hospitalUser =
-        await this.hospitalRepo.checkEmailExistsOnHospitalUser(loginData.email, true);
+        await this.hospitalRepo.checkEmailExistsOnHospitalUser(
+          loginData.email,
+          true
+        );
       if (hospitalUser instanceof Error || !hospitalUser) {
         throw Error("Invalid credentials");
       }
@@ -118,6 +122,22 @@ class HospitalService {
       return {
         accessToken,
         refreshToken,
+      };
+    } catch (error: any & ErrorInterface) {
+      throw Error(error.message);
+    }
+  }
+
+  async checkNearbyHospitals(userData: CheckNearbyHospitalsInterface) {
+    try {
+      const hospitals = await this.hospitalRepo.checkNearbyHospitals({
+        ...userData,
+        radius: 30,
+      });
+
+      return {
+        radiusUsed: 30,
+        hospitals,
       };
     } catch (error: any & ErrorInterface) {
       throw Error(error.message);

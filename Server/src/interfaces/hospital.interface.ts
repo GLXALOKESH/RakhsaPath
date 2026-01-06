@@ -66,3 +66,9 @@ export interface HospitalLoginResponseInterface {
   accessToken: string;
   refreshToken: string;
 }
+
+export interface CheckNearbyHospitalsInterface {
+    lat: number;
+    lng: number;
+    radius?: number;
+}

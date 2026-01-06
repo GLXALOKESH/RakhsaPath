@@ -26,7 +26,11 @@ export const validateDto = (DTOClass: any, source: "body" | "query" | "params" =
         return next(errors);
       }
 
-      req[source] = dtoObj;
+      if (source === "query") {
+        (req as any).queryData = dtoObj;
+      } else {
+        req[source] = dtoObj;
+      }
       next();
     } catch (err) {
       next(err);
