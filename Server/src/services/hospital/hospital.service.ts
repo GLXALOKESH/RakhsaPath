@@ -132,11 +132,11 @@ class HospitalService {
     try {
       const hospitals = await this.hospitalRepo.checkNearbyHospitals({
         ...userData,
-        radius: 30,
+        radius: 50,
       });
 
       return {
-        radiusUsed: 30,
+        radiusUsed: 50,
         hospitals,
       };
     } catch (error: any & ErrorInterface) {
