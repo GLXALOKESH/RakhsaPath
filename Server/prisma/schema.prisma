@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model HospitalUser {
+  id           String  @id @default(uuid())
+  hospitalId   String  @unique
+  email        String  @unique
+  password     String
+  refreshToken String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  hospital Hospital @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+}
+
+model Hospital {
+  id            String @id @default(uuid()) @db.VarChar(255)
+  name          String @db.VarChar(80)
+  contactNumber String @db.VarChar(15)
+  contactEmail  String @db.VarChar(120)
+  address       String @db.VarChar(255)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  location        HospitalLocation?
+  hospitalUser    HospitalUser?
+  hospitalService HospitalService?
+}
+
+model HospitalLocation {
+  hospitalId String  @id @db.VarChar(255)
+  latitude   Decimal @db.Decimal(9, 6)
+  longitude  Decimal @db.Decimal(9, 6)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  hospital Hospital @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+}
+
+model HospitalService {
+  id            String   @id @default(uuid()) @db.VarChar(255)
+  hospitalId    String   @unique @db.VarChar(255)
+  services      String[] @db.VarChar(120)
+  facilities    String[] @db.VarChar(120)
+  emergencyBeds Int      @default(0)
+  totalBeds     Int      @default(0)
+  availableBeds Int      @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  hospital Hospital @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+}
