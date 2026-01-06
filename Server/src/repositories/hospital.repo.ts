@@ -1,6 +1,8 @@
 import prismaClient from "../generated/prisma.client.js";
 import ErrorInterface from "../interfaces/error.interface.js";
-import CreateHospitalInterface from "../interfaces/hospital.interface.js";
+import CreateHospitalInterface, {
+  CheckNearbyHospitalsInterface,
+} from "../interfaces/hospital.interface.js";
 
 class HospitalRepository {
   private prismaClient;
@@ -9,7 +11,10 @@ class HospitalRepository {
     this.prismaClient = prismaClient;
   }
 
-  async checkEmailExistsOnHospitalUser(email: string, includeHospitalUser: boolean = false) {
+  async checkEmailExistsOnHospitalUser(
+    email: string,
+    includeHospitalUser: boolean = false
+  ) {
     if (!email) return Error("Please provide an email, for registration.");
 
     return this.prismaClient.hospitalUser.findFirst({
@@ -71,6 +76,49 @@ class HospitalRepository {
       where: { id },
       data: { refreshToken },
     });
+  }
+
+  async checkNearbyHospitals(userData: CheckNearbyHospitalsInterface) {
+    const { lat, lng, radius } = userData;
+
+    return this.prismaClient.$queryRaw<
+      Array<{
+        hospitalId: string;
+        name: string;
+        address: string;
+        contactNumber: string;
+        contactEmail: string;
+        latitude: number;
+        longitude: number;
+        distance: number;
+      }>
+    >`
+      SELECT *
+      FROM (
+        SELECT
+          hl."hospitalId",
+          h.name,
+          h.address,
+          h."contactNumber",
+          h."contactEmail",
+          hl.latitude,
+          hl.longitude,
+          (
+            6371 * acos(
+              cos(radians(${Number(lat)}))
+              * cos(radians(hl.latitude))
+              * cos(radians(hl.longitude) - radians(${Number(lng)}))
+              + sin(radians(${Number(lat)}))
+              * sin(radians(hl.latitude))
+            )
+          ) AS distance
+        FROM "HospitalLocation" hl
+        JOIN "Hospital" h ON hl."hospitalId" = h.id
+      ) AS sub
+      WHERE distance <= ${Number(radius)}
+      ORDER BY distance
+      LIMIT 20;
+    `;
   }
 }
 

@@ -54,7 +54,8 @@ export const ModelName = {
   HospitalUser: 'HospitalUser',
   Hospital: 'Hospital',
   HospitalLocation: 'HospitalLocation',
-  HospitalService: 'HospitalService'
+  HospitalService: 'HospitalService',
+  EmergencyBedBooking: 'EmergencyBedBooking'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -123,6 +124,21 @@ export const HospitalServiceScalarFieldEnum = {
 } as const
 
 export type HospitalServiceScalarFieldEnum = (typeof HospitalServiceScalarFieldEnum)[keyof typeof HospitalServiceScalarFieldEnum]
+
+
+export const EmergencyBedBookingScalarFieldEnum = {
+  id: 'id',
+  hospitalId: 'hospitalId',
+  userName: 'userName',
+  userPhone: 'userPhone',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  typeOfEmergency: 'typeOfEmergency',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EmergencyBedBookingScalarFieldEnum = (typeof EmergencyBedBookingScalarFieldEnum)[keyof typeof EmergencyBedBookingScalarFieldEnum]
 
 
 export const SortOrder = {

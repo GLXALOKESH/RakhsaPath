@@ -37,3 +37,8 @@ export type HospitalLocation = Prisma.HospitalLocationModel
  * 
  */
 export type HospitalService = Prisma.HospitalServiceModel
+/**
+ * Model EmergencyBedBooking
+ * 
+ */
+export type EmergencyBedBooking = Prisma.EmergencyBedBookingModel

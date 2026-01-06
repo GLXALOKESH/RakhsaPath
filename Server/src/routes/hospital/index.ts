@@ -4,6 +4,7 @@ import { validateDto } from "../../middlewares/validateDTOs.js";
 import CreateHospitalDTO from "../../DTOClasses/hospital/createHospital.DTO.js";
 import LoginHospitalDTO from "../../DTOClasses/hospital/loginHospital.DTO.js";
 import HospitalController from "../../controllers/hospital/hospital.controller.js";
+import { CheckNearbyHospitalsDTO } from "../../DTOClasses/hospital/checkNearbyHospitals.DTO.js";
 
 const hospitalRouter = Router();
 
@@ -19,6 +20,10 @@ hospitalRouter.post(
   HospitalController.loginHospital
 );
 
-// hospitalRouter.get(HospitalRoutes.GET_NEARBY_HOSPITALS);
+hospitalRouter.get(
+  HospitalRoutes.GET_NEARBY_HOSPITALS,
+  validateDto(CheckNearbyHospitalsDTO, "query"),
+  HospitalController.checkNearbyHospitals
+);
 
 export default hospitalRouter;

@@ -36,9 +36,10 @@ model Hospital {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  location        HospitalLocation?
-  hospitalUser    HospitalUser?
-  hospitalService HospitalService?
+  location            HospitalLocation?
+  hospitalUser        HospitalUser?
+  hospitalService     HospitalService?
+  emergencyBedBooking EmergencyBedBooking[]
 }
 
 model HospitalLocation {
@@ -65,4 +66,24 @@ model HospitalService {
   updatedAt DateTime @updatedAt
 
   hospital Hospital @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+}
+
+model EmergencyBedBooking {
+  id         String @id @default(uuid()) @db.VarChar(255)
+  hospitalId String @unique @db.VarChar(255)
+
+  userName  String @db.VarChar(80)
+  userPhone String @db.VarChar(15)
+
+  latitude  Decimal @db.Decimal(9, 6)
+  longitude Decimal @db.Decimal(9, 6)
+
+  typeOfEmergency String @db.VarChar(80)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  hospital Hospital @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+
+  @@index([latitude, longitude])
 }
