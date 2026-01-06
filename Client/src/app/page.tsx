@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <div className="bg-background-light text-[#111318] font-display overflow-x-hidden">
@@ -15,10 +17,10 @@ export default function Home() {
             <a className="text-[#111318] text-sm font-medium hover:text-primary transition-colors" href="#features">Features</a>
             <a className="text-[#111318] text-sm font-medium hover:text-primary transition-colors" href="#demo">Live Demo</a>
           </div>
-          <button className="flex items-center justify-center gap-2 cursor-pointer rounded-lg h-10 px-6 bg-emergency text-white text-sm font-bold shadow-md hover:bg-red-700 transition-colors animate-pulse hover:animate-none">
+          <Link href="/emergency-intake" className="flex items-center justify-center gap-2 cursor-pointer rounded-lg h-10 px-6 bg-emergency text-white text-sm font-bold shadow-md hover:bg-red-700 transition-colors animate-pulse hover:animate-none">
             <span className="material-symbols-outlined text-[20px]">e911_emergency</span>
             <span>Emergency Help</span>
-          </button>
+          </Link>
         </div>
       </header>
 
@@ -42,14 +44,14 @@ export default function Home() {
                 Intelligent emergency coordination connecting patients to nearby ambulances and hospital beds instantly. No delays, no uncertainty.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
-                <button className="flex items-center justify-center gap-2 rounded-lg h-12 px-8 bg-emergency text-white text-base font-bold shadow-lg hover:bg-red-700 transition-all transform hover:-translate-y-0.5">
+                <Link href="/emergency-intake" className="flex items-center justify-center gap-2 rounded-lg h-12 px-8 bg-emergency text-white text-base font-bold shadow-lg hover:bg-red-700 transition-all transform hover:-translate-y-0.5">
                   <span className="material-symbols-outlined">warning</span>
                   <span>Get Emergency Help</span>
-                </button>
-                <button className="flex items-center justify-center gap-2 rounded-lg h-12 px-8 bg-white border-2 border-[#e5e7eb] text-[#111318] text-base font-bold hover:border-primary hover:text-primary transition-colors">
+                </Link>
+                <Link href="/emergency-intake" className="flex items-center justify-center gap-2 rounded-lg h-12 px-8 bg-white border-2 border-[#e5e7eb] text-[#111318] text-base font-bold hover:border-primary hover:text-primary transition-colors">
                   <span className="material-symbols-outlined">local_hospital</span>
                   <span>View Nearby Hospitals</span>
-                </button>
+                </Link>
               </div>
             </div>
             {/* Hero Illustration / Image */}
@@ -315,12 +317,12 @@ export default function Home() {
           <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">In an emergency, clarity saves lives.</h2>
           <p className="text-gray-400 text-lg mb-10 max-w-2xl mx-auto">Don't waste time calling busy lines. Connect directly to the nearest available care facility instantly.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <button className="flex items-center justify-center gap-2 rounded-lg h-14 px-8 bg-emergency text-white text-lg font-bold shadow-lg shadow-red-900/50 hover:bg-red-600 transition-colors w-full sm:w-auto">
+            <Link href="/emergency-intake" className="flex items-center justify-center gap-2 rounded-lg h-14 px-8 bg-emergency text-white text-lg font-bold shadow-lg shadow-red-900/50 hover:bg-red-600 transition-colors w-full sm:w-auto">
               <span>Start Emergency Request</span>
-            </button>
-            <button className="flex items-center justify-center gap-2 rounded-lg h-14 px-8 bg-transparent border border-gray-600 text-white text-lg font-bold hover:bg-white/5 transition-colors w-full sm:w-auto">
+            </Link>
+            <Link href="/hospital/registration" className="flex items-center justify-center gap-2 rounded-lg h-14 px-8 bg-transparent border border-gray-600 text-white text-lg font-bold hover:bg-white/5 transition-colors w-full sm:w-auto">
               <span>Partner with Us (Hospitals)</span>
-            </button>
+            </Link>
           </div>
         </div>
       </section>
