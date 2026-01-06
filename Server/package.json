@@ -1,0 +1,38 @@
+{
+  "name": "rakshapath",
+  "version": "1.0.0",
+  "description": "It's a web platfrom from where you can book your current location's nearby hospitals emergency slot/seat",
+  "main": "dist/bin/app.js",
+  "type": "module",
+  "scripts": {
+    "dev:build": "tsc --build -w",
+    "dev:start": "nodemon dist/bin/app.js",
+    "dev": "pnpm dev:build & pnpm dev:start"
+  },
+  "packageManager": "pnpm@10.19.0",
+  "dependencies": {
+    "@prisma/client": "^7.2.0",
+    "bcrypt": "^6.0.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.16.3",
+    "prisma": "^7.2.0"
+  },
+  "devDependencies": {
+    "@prisma/adapter-pg": "^7.2.0",
+    "@types/bcrypt": "^6.0.0",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/pg": "^8.16.0",
+    "nodemon": "^3.1.11",
+    "reflect-metadata": "^0.2.2",
+    "typescript": "^5.9.3"
+  }
+}
